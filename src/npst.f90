@@ -1,14 +1,15 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Subroutine: NPST
 ! Language:   Fortran 90/95
+! This code can be compiled to a shared library (DLL on Windows) and
+! then be interfaced via R (www.r-project.org) to derive the empirical
+! distribution of a generalization of Hewitt's and Rogerson's
+! nonparametric seasonality tests.
 !
-! This subroutine estimates via Monte-Carlo simulation the empirical
-! cumulative distribution function for a generalized version of
-! Hewitt's et al. (1971) and Rogerson's (1996) nonparametric
-! seasonality tests. Please see the associated documentation in
-! package 'npst' for further details.
+! This code has been successfully compiled  on Windows XP, GNU/Linux (Ubuntu) and FreeBSD
+! using 'gfortran' from the GNU Compiler Collection (gcc)
 !
-! Copyright (C) 2007-2010  Roland Rau (roland.rau@gmail.com)
+! Copyright (C) 2007-2010  Roland Rau
 !
 ! This program is free software; you can redistribute it and/or
 ! modify it under the terms of the GNU General Public License
@@ -25,25 +26,38 @@
 ! Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-subroutine npst(lng, pk, rpts, mxrksum, resvec, basedata, basedata2, seed)
+subroutine npst(lng, pk, rpts, mxrksum, resvec, basedata, basedata2)
   implicit none
-  integer, intent(in)   :: lng, pk, rpts, mxrksum
-  integer, intent(out)  :: resvec(mxrksum)
+  integer               :: lng, pk, rpts, mxrksum
+  integer               :: resvec(mxrksum)
   real                  :: x
-  integer, intent(in)   :: seed(8)
   integer               :: basedata(lng)
   integer               :: basedata2(lng*2)
   integer               :: tempvalue, posis, maxconsecsum, temp
+
   integer               :: i,j
 
-  call random_seed(PUT=seed)
+  integer               :: ii, n, clock
+
+  integer, DIMENSION(:), ALLOCATABLE :: seed
+  
+  CALL RANDOM_SEED(size = n)
+  ALLOCATE(seed(n))
+  
+  CALL SYSTEM_CLOCK(COUNT=clock)
+  
+  seed = clock + 37 * (/ (i - 1, i = 1, n) /)
+  CALL RANDOM_SEED(PUT = seed)
+  
+  DEALLOCATE(seed)
+
+  i = 0
  
   ! the main loop
   do j=1,rpts,1
      call random_number(x)
-     
+  
      ! generating a random permutation of 'basedata' and 'basedata2'
-     ! (a "shuffle")
      ! 
      do i = lng, 1, -1
         posis = floor(1 + x*i)
@@ -54,21 +68,16 @@ subroutine npst(lng, pk, rpts, mxrksum, resvec, basedata, basedata2, seed)
         basedata2(i+lng) = basedata(i)
      end do
      
-     
+    
      maxconsecsum = sum(basedata2(1:(1+pk-1)))
      temp =  sum(basedata2(1:(1+pk-1)))
-     ! little trick (?) coming up here: instead of summing, for
-     ! instance from 2 to 7, 3 to 8, ... --- we take the previous sum
-     ! (e.g. from 1 to 6), subtract element 1 and add element 7. I
-     ! played around with both approaches and this one gave a
-     ! significant speed boost (at least 10% faster now)
-     do i = 2, lng, 1
-        temp = temp - basedata2(i-1) + basedata2(i+pk-1)
-        if (temp > maxconsecsum) maxconsecsum = temp
-     end do
+      do i =2, lng, 1
+         temp = temp - basedata2(i-1) + basedata2(i+pk-1)
+         if (temp > maxconsecsum) maxconsecsum = temp
+      end do
      
-     resvec(maxconsecsum) = resvec(maxconsecsum) + 1
-     
-  end do
+      resvec(maxconsecsum) = resvec(maxconsecsum) + 1
 
+   end do
+   !  deallocate(iseed)
 end subroutine npst

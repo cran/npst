@@ -2,18 +2,18 @@
 \alias{npst-package}
 \docType{package}
 \title{
-Implementation of a Generalized Nonparametric Seasonality Test  
+npst
 }
 \description{
-Package 'npst' implements a generalization of Hewitt's (et al. 1971) and
-Rogerson's (1996) test for seasonality.
+  Package 'npst' generalizes Hewitt's (1971) test for seasonality and
+  Rogerson's (1996) extension based on Monte-Carlo simulation.
 }
 \details{
 \tabular{ll}{
 Package: \tab npst\cr
 Type: \tab Package\cr
-Version: \tab 1.0\cr
-Date: \tab 2010-11-24\cr
+Version: \tab 1.2\cr
+Date: \tab 2011-05-10\cr
 License: \tab GPL-2\cr
 LazyLoad: \tab yes\cr
 }
@@ -24,18 +24,50 @@ Roland Rau
 Maintainer: Roland Rau <roland.rau@gmail.com>
 }
 \references{
-  D. Hewitt, J. Milner, A. Csima, A. Pakula (1971): On Edwards'
-  Criterion of Seasonality and a Non-Parametric Alternative. British
-  Journal of Preventive Social Medicine 25:174--176
-      
-  P.A. Rogerson (1996): A Generalization of Hewitt's Test for
-  Seasonality. International Journal of Epidemiology 25:644--648
+@article{edwards,
+	author={Edwards, J. H. },
+	title={The recognition and estimation of cyclic trends},
+	journal={Annals of Human Genetics},
+	volume={25},
+	year={1961},
+	pages={83--86}
+}
 
-  S.D. Walter (1980): Exact significance levels for Hewitt's test for
-  seasonality. Journal of Epidemiology and Community Health
-  34:147--149
+@article{hewitt,
+	author={Hewitt, David and Milner, Jean and Csima, Adele and Pakula, Andrew},
+	title={On {E}dwards' Criterion of Seasonality and a Non-Parametric Alternative},
+	journal={British Journal of Preventive Social Medicine},
+	volume={25},
+	year={1971},
+	pages={174--176}
+}
+
+@article{rogerson,
+	author={Rogerson, Peter A.},
+	title={A {G}eneralization of {H}ewitt's {T}est for {S}easonality},
+	journal={International Journal of Epidemiology},
+	volume={25},
+	year={1996},
+	pages={644--648}
+}
+
+
+@article{walter,
+	author={Walter, S.D.},
+	title={Exact significance levels for {H}ewitt's test for seasonality},
+	journal={Journal of Epidemiology and Community Health},
+	volume={34},
+	year={1980},
+	pages={147--149}
+}
+  
+  
 }
 \keyword{ package }
+\seealso{
+}
 \examples{
-npst()
+###  replicate Walter's (1980) exact results for Hewitt's test for
+###  seasonality via Monte Carlo Simulation
+npst(long=12, peak=6, repts=100000, outputrows=5)
 }
