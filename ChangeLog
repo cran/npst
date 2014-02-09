@@ -1,0 +1,25 @@
+2014-02-09 v2.0 <roland.rau@gmail.com>	
+	Switching from the "doMC" package to the "parallel" package.
+	
+2011-12-11 v1.8 <roland.rau@gmail.com>	
+	Change of "Depends" to "Suggests" to allow successful testing on
+	non-unix-like systems. Thanks to Henrik Bengtsson on the
+	r-devel-list.
+2011-08-26 v1.7 <roland.rau@gmail.com>	
+	Check whether Unix-like operating system. If not, PARALLEL
+	argument is disregarded since it requires other packages which are
+	only available on Unix-like operating systems. A Warning will be
+	issued.
+2011-08-26 v1.6 <roland.rau@gmail.com>	
+	large extension of main function "npst" to be able to supply your
+	own data, etc.
+2011-07-17 v1.3 <roland.rau@gmail.com>	
+	Implementation of PARALLEL Argument in file npst.r in function
+	npst().
+	
+2011-05-10 v1.2 <roland.rau@gmail.com>
+	Changed npst.f90 due to compiler problems with new gfortran
+	release. Pointed out to me by Kurt Hornik.
+
+2010-11-01 v1.1 <roland.rau@gmail.com>
+	First release of NPST with minor bugfixes.

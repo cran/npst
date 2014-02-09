@@ -1,7 +1,8 @@
-bd171a532071daea27fec78fae0e899e *DESCRIPTION
-9fdfeb11f7ddba6f3aab9aaa6b1ac5dd *NAMESPACE
-0ba0d9d26ce5bf6e44035480fa5ee859 *R/npst.r
+80811f7a742a11b9bfb7858e57db38a0 *ChangeLog
+9a6f209412dc0bed9053ea960b6eb9c0 *DESCRIPTION
+cd9ab713b506a5c686b9a46d30fc4ad2 *NAMESPACE
+33e6b276d99d6ac1402f3d1f1101c53c *R/npst.r
 3933d31fb4f4d6a7928eed1d760a9431 *man/npst-internal.Rd
-9e20299c7e8f6f54e22449611d3366b7 *man/npst-package.Rd
-5d049e5ed2279e54e823e5e7dc7b6fce *man/npst.Rd
-9e5b8309517bd1c37aafa5c3aebe1991 *src/npst.f90
+bbf3951b10ec4639d9e3e2ec419f8d84 *man/npst-package.Rd
+c728ecb3d4566f71e87fef9111c4c8d3 *man/npst.Rd
+c32e94d738bdf46b904eedd42fac709d *src/npst.f90

@@ -37,7 +37,7 @@ subroutine npst(lng, pk, rpts, mxrksum, resvec, basedata, basedata2)
 
   integer               :: i,j
 
-  integer               :: ii, n, clock
+  integer               :: n, clock
 
   integer, DIMENSION(:), ALLOCATABLE :: seed
   
